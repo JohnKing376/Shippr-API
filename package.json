@@ -1,0 +1,11 @@
+{
+  "name": "shippr-api",
+  "version": "0.0.1",
+  "description": "Shippr is a courier service that helps users deliver parcels to different destinations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "John O.King",
+  "license": "MIT"
+}
