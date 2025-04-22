@@ -2,10 +2,25 @@
   "name": "shippr-api",
   "version": "0.0.1",
   "description": "Shippr is a courier service that helps users deliver parcels to different destinations",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "John O.King",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/node": "^7.26.0",
+    "@babel/plugin-transform-runtime": "^7.26.10",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.26.9",
+    "@babel/register": "^7.25.9",
+    "@paralleldrive/cuid2": "^2.2.2",
+    "babel-node": "^0.0.1-security",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.9"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.27.0"
+  }
 }
