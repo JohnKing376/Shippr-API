@@ -2,9 +2,13 @@
   "name": "shippr-api",
   "version": "0.0.1",
   "description": "Shippr is a courier service that helps users deliver parcels to different destinations",
-  "main": "server.js",
+  "main": "src/server.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --env-file=.env src/server.js",
+    "build": "babel src -d dist",
+    "start:dev": "nodemon --env-file=.env --watch  src/server.js"
   },
   "author": "John O.King",
   "license": "MIT",
