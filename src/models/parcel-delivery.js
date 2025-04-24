@@ -55,3 +55,5 @@ class ParcelDelivery {
         return `Parcel Delivery with this id ${id} has been deleted successfully`
     }
 }
+
+export default new ParcelDelivery()
