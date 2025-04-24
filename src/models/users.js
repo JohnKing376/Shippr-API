@@ -31,11 +31,6 @@ class User {
 
     update(id, data) {
         const user = this.users.findOne(id);
-
-        if(!user) {
-            return new Error(`User with this id ${id} does not exist`);
-        }
-
         const index = this.users.indexOf(user);
 
         this.users[index].firstName = data.firstName || user.firstName;
@@ -48,10 +43,6 @@ class User {
 
     delete(id) {
         const parcel = this.findOne(id)
-
-        if(!parcel) {
-            return new Error(`user with this id ${id} doesn't exist`)
-        }
 
         const index = this.users.indexOf(parcel)
         this.users.splice(index, 1)

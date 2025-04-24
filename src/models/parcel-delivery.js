@@ -33,11 +33,6 @@ class ParcelDelivery {
 
     updateParcel(id, data) {
         const parcel = this.findOne(id)
-
-        if(!parcel) {
-            return new Error(`Parcel Delivery with this id ${id} doesn't exist`)
-        }
-
         const index = this.parcelDeliveries.indexOf(parcel)
 
         this.parcelDeliveries[index].senderName = data.senderName || parcel.senderName
@@ -54,11 +49,6 @@ class ParcelDelivery {
 
     deleteParcel(id) {
         const parcel = this.findOne(id)
-
-        if(!parcel) {
-            return new Error(`Parcel Delivery with this id ${id} doesn't exist`)
-        }
-
         const index = this.parcelDeliveries.indexOf(parcel)
         this.parcelDeliveries.splice(index, 1)
 
