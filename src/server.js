@@ -10,4 +10,10 @@ app.get('/', (req, res) => {
 })
 
 
+app.all('/{*any}', (req, res, next) => {
+    res.status(404).send('Resource not Found')
+    next()
+})
+
+
 app.listen(port, () => console.log(`Server running on port ${port}`))
