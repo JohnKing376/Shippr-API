@@ -20,7 +20,7 @@ export const createParcelDelivery =  (req, res) => {
         const deliveryParcel = parcelModel.createParcelDelivery({senderName, receiverName, address, receiversAddress, weight, status})
         res.status(201).json({
             status_code: 201,
-            status: 'SUCCESS',
+            status: 'CREATED',
             message: 'Parcel Delivery created successfully',
             parcelDelivery: deliveryParcel
         })
@@ -54,8 +54,9 @@ export const updateParcelDelivery = (req, res) => {
 
       if(!parcel) {
           return res.status(404).json({
+              status_code: 404,
+              status: 'NOT_FOUND',
               message: 'Parcel Delivery not found',
-              status: 404,
           })
       }
 
@@ -114,8 +115,9 @@ export const findAllParcels = (req, res) => {
       const parcels = parcelModel.findAll()
 
       res.status(200).json({
+          status_code: 200,
+          status: 'OK',
           message: 'Parcel Delivery List Fetched Successfully',
-          status: 200,
           parcels: parcels
       })
   } catch (error) {

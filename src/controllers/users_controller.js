@@ -23,7 +23,7 @@ export const createUser = (req, res) => {
 
          res.status(201).json({
             status_code: 201,
-            status: 'SUCCESS',
+            status: 'CREATED',
             message: 'User created successfully.',
             user: user
         })
@@ -89,7 +89,7 @@ export const getUserById = (req, res) => {
 
         res.status(200).json({
             status_code: 200,
-            status: 'SUCCESS',
+            status: 'OK',
             message: 'Fetched User Successfully',
             user: user
         })
@@ -133,15 +133,16 @@ export const deleteOne = (req, res) => {
 
       if(!user) {
           return res.status(404).json({
+              status_code: 404,
+              status: 'NOT_FOUND',
               message: `User with this id ${id} does not exist`,
-              status: 404,
           })
       }
       userModel.delete(user.id)
 
       res.status(200).json({
           status_code: 200,
-          status: 'SUCCESS',
+          status: 'OK',
           message: 'User deleted successfully.',
           deletedUser: user
       })
