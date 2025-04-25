@@ -19,16 +19,18 @@ export const createParcelDelivery =  (req, res) => {
 
         const deliveryParcel = parcelModel.createParcelDelivery({senderName, receiverName, address, receiversAddress, weight, status})
         res.status(201).json({
+            status_code: 201,
+            status: 'SUCCESS',
             message: 'Parcel Delivery created successfully',
-            status: 201,
             parcelDelivery: deliveryParcel
         })
-    } catch (err) {
-        console.error(err)
+    } catch (error) {
+        console.error(error)
         res.status(500).json({
+            status_code: 500,
+            status: 'ERROR',
             message: `Internal Server Error`,
-            status: 500,
-            error: err
+            error: error
         })
     }
 }
@@ -60,16 +62,18 @@ export const updateParcelDelivery = (req, res) => {
       parcelDelivery.updateParcel(parcel.id, {senderName, receiverName, address, receiversAddress, weight, status})
 
       res.status(200).json({
+          status_code: 200,
+          status: 'SUCCESS',
           message: 'Parcel Delivery updated successfully',
-          status: 200,
           parcelDelivery: parcelDelivery
       })
-  } catch (err) {
-      console.error(err)
+  } catch (error) {
+      console.error(error)
       res.status(500).json({
+          status_code: 500,
+          status: 'ERROR',
           message: `Internal Server Error`,
-          status: 500,
-          error: err
+          error: error
       })
   }
 }
@@ -81,22 +85,25 @@ export const findOneParcel = (req,  res) => {
 
         if(!parcel) {
             return res.status(404).json({
+                status_code: 404,
+                status: 'NOT_FOUND',
                 message: 'Parcel Delivery not found',
-                status: 404,
             })
         }
 
         res.status(200).json({
+            status_code: 200,
+            status: 'SUCCESS',
             message: 'Fetched Parcel Delivery Successfully',
-            status: 200,
             parcelDelivery: parcel
         })
-    } catch (err) {
-        console.error(err)
+    } catch (error) {
+        console.error(error)
         res.status(500).json({
+            status_code: 500,
+            status: 'ERROR',
             message: `Internal Server Error`,
-            status: 500,
-            error: err
+            error: error
         })
     }
 
@@ -111,12 +118,13 @@ export const findAllParcels = (req, res) => {
           status: 200,
           parcels: parcels
       })
-  } catch (err) {
-      console.error(err)
+  } catch (error) {
+      console.error(error)
       res.status(500).json({
+          status_code: 500,
+          status: 'ERROR',
           message: `Internal Server Error`,
-          status: 500,
-          error: err
+          error: error
       })
   }
 }
