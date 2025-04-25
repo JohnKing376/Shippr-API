@@ -1,51 +1,75 @@
 import userModel from '../models/users.js'
+import {validationResult} from "express-validator";
 
 export const createUser = (req, res) => {
     try {
-        const {firstName, lastName, password} = req.body
+        /*
+        Validation
+         */
+            const result = validationResult(req)
 
-        if(!firstName || !lastName || !password) {
-            return res.status(400).json({'message': 'All fields are required'})
-        }
+            if(!result.isEmpty())  {
+                return  res.status(400).send({
+                    status_code: 400,
+                    status: 'VALIDATION_ERROR',
+                    message: result,
+                })
+
+            }
+
+        const {firstName, lastName, password} = req.body
 
         const user = userModel.createUser({firstName, lastName, password})
 
          res.status(201).json({
+            status_code: 201,
+            status: 'SUCCESS',
             message: 'User created successfully.',
-            status: 201,
             user: user
         })
-    } catch (e) {
-        console.error(e)
+    } catch (error) {
         res.status(500).json({
+            status_code: 500,
+            status: 'ERROR',
             message: `Something went wrong`,
-            status: 500,
-            error: e
+            error: error
         })
     }
 }
 
 export const updateUser = (req, res) => {
     try {
-        const {id, firstName, lastName, password} = req.body
 
-        if(!firstName || !lastName || !password) {
-            return res.status(400).json({'message': 'All fields are required'})
+        const result = validationResult(req)
+
+        if(!result.isEmpty())  {
+            return  res.status(400).send({
+                status_code: 400,
+                status: 'VALIDATION_ERROR',
+                message: result,
+            })
+
         }
+
+        const { id } = req.params
+
+        const {firstName, lastName, password} = req.body
 
         const user = userModel.update(id, {firstName, lastName, password})
 
         res.status(200).json({
+            status_code: 200,
+            status: 'SUCCESS',
             message: 'User updated successfully.',
-            status: 200,
             user: user
         })
-    } catch (err) {
-        console.error(err)
+    } catch (error) {
+        console.error(error)
         res.status(500).json({
+            status_code: 500,
+            status: 'ERROR',
             message: `Internal Server Error`,
-            status: 500,
-            error: err
+            error: error
         })
     }
 }
@@ -64,15 +88,17 @@ export const getUserById = (req, res) => {
         }
 
         res.status(200).json({
+            status_code: 200,
+            status: 'SUCCESS',
             message: 'Fetched User Successfully',
-            status: 200,
             user: user
         })
-    } catch (err) {
+    } catch (error) {
         res.status(500).json({
+            status_code: 500,
+            status: 'ERROR',
             message: `Internal Server Error`,
-            status: 500,
-            error: err
+            error: error
         })
     }
 }
@@ -83,21 +109,24 @@ export const getAllUsers = (req, res) => {
         const users = userModel.findAll()
 
         res.status(200).json({
+            status_code: 200,
+            status: 'SUCCESS',
             message: 'User List Fetched Successfully',
-            status: 200,
             users: users,
         })
-    } catch(err) {
+    } catch(error) {
         res.status(500).json({
+            status_code: 500,
+            status: 'ERROR',
             message: `Internal Server Error`,
-            status: 500,
-            error: err
+            error: error
         })
     }
 }
 
 export const deleteOne = (req, res) => {
   try {
+
       const { id } = req.params
 
       const user = userModel.findOne(id)
@@ -111,15 +140,17 @@ export const deleteOne = (req, res) => {
       userModel.delete(user.id)
 
       res.status(200).json({
+          status_code: 200,
+          status: 'SUCCESS',
           message: 'User deleted successfully.',
-          status: 200,
           deletedUser: user
       })
-  } catch (err) {
+  } catch (error) {
       res.status(500).json({
+          status_code: 500,
+          status: 'ERROR',
           message: `Internal Server Error`,
-          status: 500,
-          error: err
+          error: error
       })
   }
 }
