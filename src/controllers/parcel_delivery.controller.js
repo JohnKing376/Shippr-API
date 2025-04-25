@@ -1,8 +1,20 @@
 import parcelModel from '../models/parcel-delivery.js'
 import parcelDelivery from "../models/parcel-delivery.js";
+import {validationResult} from "express-validator";
 
 export const createParcelDelivery =  (req, res) => {
     try {
+        const result = validationResult(req)
+
+        if(!result.isEmpty())  {
+            return  res.status(400).send({
+                status_code: 400,
+                status: 'VALIDATION_ERROR',
+                message: result,
+            })
+
+        }
+
         const {senderName, receiverName, address, receiversAddress, weight, status} = req.body
 
         const deliveryParcel = parcelModel.createParcelDelivery({senderName, receiverName, address, receiversAddress, weight, status})
@@ -23,6 +35,17 @@ export const createParcelDelivery =  (req, res) => {
 
 export const updateParcelDelivery = (req, res) => {
   try {
+      const result = validationResult(req)
+
+      if(!result.isEmpty())  {
+          return  res.status(400).send({
+              status_code: 400,
+              status: 'VALIDATION_ERROR',
+              message: result,
+          })
+
+      }
+
       const {id, senderName, receiverName, address, receiversAddress, weight, status} = req.body
 
       const parcel = parcelModel.findOne(id)
