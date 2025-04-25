@@ -1,12 +1,29 @@
 import express from 'express'
+import userRoutes from './routes/user_routes.js'
 
 const app = express()
 const port = process.env.PORT || 5000;
 
+/**
+ * App Middleware
+ */
 app.use(express.json())
 
+/**
+ * App routes
+ */
 app.get('/', (req, res) => {
-    res.send('You are welcome')
+    res.status(200).send({
+        status_code: 200,
+        status: 'OK',
+        message: 'Shippr API'
+    })
+})
+
+app.use('/users', userRoutes)
+
+app.all('/{*any}', (req, res, next) => {
+  res.status(404).json({message: 'Resource Not Found'})
 })
 
 
